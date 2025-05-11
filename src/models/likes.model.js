@@ -34,15 +34,6 @@ likeSchema.pre("validate", function (next) {
   next();
 });
 
-/*
-* Indexing:
-* - A compound unique index is created on the combination of `likedBy`, `video`, 
-*   `comment`, and `tweet`. This ensures that a user can only like a specific 
-*   entity (video, comment, or tweet) once.
-* - The `partialFilterExpression` ensures that the uniqueness constraint is only 
-*   applied when at least one of `video`, `comment`, or `tweet` exists. This 
-*   prevents conflicts when other fields are null.
-*/
 
 likeSchema.index(
   {

@@ -1,6 +1,8 @@
 import mongoose, {Schema} from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 
+//TODO: Nested Comment
+
 const commentSchema = new Schema({
     content: {
         type: String,

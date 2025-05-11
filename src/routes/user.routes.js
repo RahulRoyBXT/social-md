@@ -14,6 +14,10 @@ import {
 } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { validateImageFiles } from "../middlewares/filevalidation.middleware.js";
+import { register_user_validation } from "../validations/user.validation.js";
+import { validateBody } from "../middlewares/validateRequest.middleware.js";
+import { validateRegisterBody } from "../middlewares/validateRegister.middleware.js";
 
 const router = Router();
 
@@ -28,10 +32,14 @@ router.route("/register").post(
       maxCount: 1,
     },
   ]),
+  validateImageFiles,
+  validateRegisterBody(register_user_validation),
+
   registerController
 );
 
-router.route("/login").post(loginUser);
+
+router.route("/login").post(upload.none(),loginUser);
 
 // Secured routes
 router.route("/logout").post(verifyJWT, logOut);
